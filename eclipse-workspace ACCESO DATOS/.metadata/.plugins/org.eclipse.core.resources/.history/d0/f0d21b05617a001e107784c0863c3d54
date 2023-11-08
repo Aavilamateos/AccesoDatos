@@ -1,0 +1,8 @@
+package prueba.service;
+
+public class DeporteClient {
+
+	public DeporteClient() {
+	}
+
+}

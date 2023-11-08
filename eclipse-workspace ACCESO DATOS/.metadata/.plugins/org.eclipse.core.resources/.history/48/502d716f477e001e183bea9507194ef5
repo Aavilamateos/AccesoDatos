@@ -1,0 +1,63 @@
+package ceu.dam.ad.ejerciciosTema2.ejercicio6.enunciado.clients;
+
+import java.sql.Connection;
+import java.util.List;
+
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import ceu.dam.ad.ejerciciosTema2.ejercicio5.solucion.dao.CityDao;
+import ceu.dam.ad.ejerciciosTema2.ejercicio5.solucion.services.OpenConnection;
+import ceu.dam.ad.ejerciciosTema2.ejercicio6.enunciado.modelo.Ciudad;
+@RestController
+public class CiudadesClientImpl implements CiudadesClient{
+
+	private OpenConnection openConn;
+	private CityDao dao;
+	private String urlBase;
+	private RestTemplate restTemplate;
+	
+	public CiudadesClientImpl(String urlBase, Integer msTimeout) {
+		openConn = new OpenConnection();
+		dao = new CityDao();
+		this.urlBase=urlBase;
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+		requestFactory.setConnectionRequestTimeout(msTimeout);
+		this.restTemplate = new RestTemplate(requestFactory);
+	}
+
+	@Override
+	@GetMapping("/city")
+	public List<Ciudad> getCities(String filtroDescripcion) throws CiudadNoEncontradaException, CiudadErrorException {
+		Connection conn = null;
+		
+		return null;
+	}
+
+	@Override
+	public Ciudad getCity(Long id) throws CiudadNoEncontradaException, CiudadErrorException {
+		return null;
+	}
+
+	@Override
+	public Ciudad createCity(Ciudad city) throws CiudadErrorException {
+		return null;
+	}
+
+	@Override
+	public void updateCity(Ciudad city) throws CiudadNoEncontradaException, CiudadErrorException {
+	}
+
+	@Override
+	public Ciudad updateSelectiveCity(Ciudad city) throws CiudadNoEncontradaException, CiudadErrorException {
+		return null;
+	}
+
+	@Override
+	public void deleteCity(Long id) throws CiudadNoEncontradaException, CiudadErrorException {
+	}
+
+
+}

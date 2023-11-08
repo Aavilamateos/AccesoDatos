@@ -1,0 +1,13 @@
+package prueba.cliente;
+
+import prueba.modelo.Deporte;
+
+public class App {
+
+	public static void main(String[] args) {
+		DeporteClient client=new DeporteClient("https://localhost:8080", 2000);
+		Deporte deport=client.consultarDeporte(63);
+		System.out.println(deporte);
+	}
+
+}

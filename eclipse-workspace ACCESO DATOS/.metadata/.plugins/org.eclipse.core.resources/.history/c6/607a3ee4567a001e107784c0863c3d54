@@ -1,0 +1,134 @@
+package ejerciciosPracticos.ej5.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import ejerciciosPracticos.ej5.modelo.City;
+
+public class CityDao {
+
+	public List<City>getCities(Connection conn, String desc) throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			String sql="SELECT * FROM CITY WHERE city like '%"+desc+"%'";
+			List<City>listaCiudades=new ArrayList<City>();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while (rs.next()) {
+				City city=new City();
+				city.setCountryId(rs.getLong("country_id"));
+				city.setId(rs.getLong("city_id"));
+				city.setDescripcion(rs.getString("city"));
+				listaCiudades.add(city);
+				return listaCiudades;
+			}
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}	
+	}
+	//preguntar por el null de la condicion
+	public City getCity(Connection conn, Long id) throws SQLException {
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			String sql="SELECT * FROM city WHERE city_id = "+id;
+			City city=new City();
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			while (rs.next()) {
+				city.setId(rs.getLong("city_id"));
+				city.setDescripcion(rs.getString("city"));
+				city.setCountryId(rs.getLong("country_id"));
+			}
+			return city;
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+	
+	public City createCity(Connection conn, City city) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			String sql= "INSERT into city (city, country_id) values (?,?)";
+			stmt=conn.prepareStatement(sql);
+			stmt.setString(1, city.getDescripcion());
+			stmt.setLong(2, city.getCountryId());
+			stmt.execute();
+			
+			return city;
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+	
+	public void updateCity(Connection conn, City city) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			String sql= "UPDATE CITY SET city_id = ?, city = ?, country_id = ? where city_id = " + city.getId();
+			stmt=conn.prepareStatement(sql);
+			stmt.setLong(1, city.getId());
+			stmt.setString(2, city.getDescripcion());
+			stmt.setLong(3, city.getCountryId());
+			stmt.execute();
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+	public City updateSelectiveCity(Connection conn, City city) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			String sql= "UPDATE CITY SET city_id = ?, city = ?, country_id = ? where city_id = " + city.getId();
+			stmt=conn.prepareStatement(sql);
+			if (city.getId()==null||city.getDescripcion()==null||city.getCountryId()==null) {
+				stmt.setLong(1, city.getId());	
+				stmt.setString(2, city.getDescripcion());	
+				stmt.setLong(3, city.getCountryId());
+			}
+			else {
+				stmt.setLong(1, city.getId());	
+				stmt.setString(2, city.getDescripcion());	
+				stmt.setLong(3, city.getCountryId());
+			}
+			stmt.execute();
+			return city;
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+	
+	public void deleteCity(Connection conn, Long id) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			String sql= "DELETE * FROM city where city_id = "+id;
+			stmt=conn.prepareStatement(sql);
+			stmt.execute();
+		} finally {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+}

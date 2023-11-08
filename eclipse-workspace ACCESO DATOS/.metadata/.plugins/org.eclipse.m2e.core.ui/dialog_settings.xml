@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="PruebaLombok"/>
+			<item value="Ceu-FCT"/>
+			<item value="Ejercicio2ServicioClientes"/>
+			<item value="Ejercicio1Peliculas"/>
+			<item value="ceu.dam"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="PruebaLombok"/>
+			<item value="Ceu-FCT"/>
+			<item value="Ejercicio2ServicioClientes"/>
+			<item value="Ejercicio1Peliculas"/>
+			<item value="Ejemplo1"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+			<item value="1.0.0"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\aavila3794\eclipse-workspace ACCESO DATOS"/>
+			<item value="C:\Users\aavila3794\eclipse-workspace ACCESO DATOS\ejerciciosTema2"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

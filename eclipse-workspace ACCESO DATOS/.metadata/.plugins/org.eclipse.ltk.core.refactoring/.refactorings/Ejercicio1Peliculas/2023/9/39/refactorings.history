@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;OpenConnection.java&apos; to &apos;Ejercicio2ServicioClientes/src/Ejercicio02.service&apos;&#x0D;&#x0A;- Original project: &apos;Ejercicio1Peliculas&apos;&#x0D;&#x0A;- Destination element: &apos;Ejercicio2ServicioClientes/src/Ejercicio02.service&apos;&#x0D;&#x0A;- Original element: &apos;ejercicio01.service.OpenConnection.java&apos;" description="Copy compilation unit" destination="=Ejercicio2ServicioClientes/src=/optional=/true=/=/maven.pomderived=/true=/&lt;Ejercicio02.service" element1="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;ejercicio01.service{OpenConnection.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1695824663438" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,91 @@
+package ceu.dam.ad.ejerciciosTema2.ejercicio6.enunciado.clients;
+
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
+
+
+import ceu.dam.ad.ejerciciosTema2.ejercicio6.enunciado.modelo.Ciudad;
+
+public class CiudadesClientImpl implements CiudadesClient{
+
+	private String urlBase;
+	private RestTemplate restTemplate;
+	
+	public CiudadesClientImpl(String urlBase, Integer msTimeout) {
+		this.urlBase=urlBase;
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+		requestFactory.setConnectionRequestTimeout(msTimeout);
+		this.restTemplate = new RestTemplate(requestFactory);
+	}
+
+	@Override
+	public List<Ciudad> getCities(String filtroDescripcion) throws CiudadNoEncontradaException, CiudadErrorException {
+		try {
+			String url= urlBase + "/city?filtroDescripcion="+filtroDescripcion;
+			Ciudad [] listaCiudades=restTemplate.getForObject(url, Ciudad[].class);
+			return Arrays.asList(listaCiudades);
+			
+		} catch (HttpStatusCodeException e) {
+			if (e.getStatusCode()==HttpStatus.NOT_FOUND) {
+				throw new CiudadNoEncontradaException("No existe la ciudad con las letras "+filtroDescripcion);	
+			}
+			throw e;
+		}
+	}
+
+	@Override
+	public Ciudad getCity(Long id) throws CiudadNoEncontradaException, CiudadErrorException {
+		try {
+			String url= urlBase + "/city?id="+id;
+			Ciudad ciudad=restTemplate.getForObject(url, Ciudad.class);
+			return ciudad;
+			
+		} catch (HttpStatusCodeException e) {
+			if (e.getStatusCode()==HttpStatus.NOT_FOUND) {
+				throw new CiudadNoEncontradaException("No existe la ciudad con el id  "+id);
+			}
+			throw e;
+		}
+	}
+
+	@Override
+	public Ciudad createCity(Ciudad city) throws CiudadErrorException {
+		try {
+			String url= urlBase + "/city";
+			city=restTemplate.postForObject(url, city, Ciudad.class);
+			return city;	
+		} catch (HttpStatusCodeException e) {
+			throw new CiudadErrorException();
+		}
+	}
+
+	@Override
+	public void updateCity(Ciudad city) throws CiudadNoEncontradaException, CiudadErrorException {
+	try {
+		String url= urlBase + "/city";
+		restTemplate.put(url, city);
+	} catch (HttpStatusCodeException e) {
+		if (e.getStatusCode()==HttpStatus.NOT_FOUND) {
+			throw new CiudadNoEncontradaException("No existe la ciudad con el id  "+id);
+		}
+		throw e;
+	}
+	}
+
+	@Override
+	public Ciudad updateSelectiveCity(Ciudad city) throws CiudadNoEncontradaException, CiudadErrorException {
+		return null;
+	}
+
+	@Override
+	public void deleteCity(Long id) throws CiudadNoEncontradaException, CiudadErrorException {
+	}
+
+
+}
